@@ -50,7 +50,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_auth.registration',
-    'user_profile'
+    'django_cron',
+    'user_profile',
+    'warehouse',
 ]
 
 MIDDLEWARE = [
@@ -211,7 +213,13 @@ CORS_ALLOW_HEADERS = [
 
 ]
 
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+RABBITMQ_HOST = 'localhost'
+RABBITMQ_QUEUE = 'warehouse'
 
+CRON_CLASSES = [
+    "warehouse.load_job",
+    "warehouse.unload_job"
+    # ...
+]
